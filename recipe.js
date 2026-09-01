@@ -9,7 +9,7 @@ function getRecipes(recipes){
 
 
   // for now just slicing the array we got from the response to upto 3 indexes only 
-  recipes.slice(0,3).forEach((recipe) => {
+  recipes.slice(0,10).forEach((recipe) => {
 
     // li class for each recipe 
     const recipeItem = document.createElement('li');
@@ -23,15 +23,22 @@ function getRecipes(recipes){
     const recipeTitle = document.createElement('h2');
     recipeTitle.innerHTML = recipe.name; // name we got from the response 
 
-    // p for ingredient
+    // ingredients fetch from the response 
     const recipeIngredients = document.createElement('p');
-    recipeIngredients.innerHTML = `<strong>Ingredients: </strong>${recipe.ingredients}`;
+    recipeIngredients.innerHTML = `<strong>Ingredients: </strong>${recipe.ingredients.join(', ')}`;
 
-    // p tag for instructons also 
-    const recipeInstructions = document.createElement('p');
-    recipeInstructions.textContent = recipe.instructions;
+    // instructons added and also to mention the instruction in a cleann format ol is used
+    const recipeInstructions = document.createElement('ol');
+    recipeInstructions.classList.add('instruction-list');
 
-    // append the title to recipelist 
+    // loop to make the list clean
+    recipe.instructions.forEach((cleanList) => {
+      const items = document.createElement('li');
+      items.textContent = cleanList;
+      recipeInstructions.appendChild(items);
+    });
+
+    // append all  the elements to recipelist 
     recipeItem.appendChild(recipeTitle);
     recipeItem.appendChild(recipeImg);
     recipeItem.appendChild(recipeIngredients)
