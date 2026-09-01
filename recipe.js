@@ -23,9 +23,19 @@ function getRecipes(recipes){
     const recipeTitle = document.createElement('h2');
     recipeTitle.innerHTML = recipe.name; // name we got from the response 
 
-    // append the title to li 
+    // p for ingredient
+    const recipeIngredients = document.createElement('p');
+    recipeIngredients.innerHTML = `<strong>Ingredients: </strong>${recipe.ingredients}`;
+
+    // p tag for instructons also 
+    const recipeInstructions = document.createElement('p');
+    recipeInstructions.textContent = recipe.instructions;
+
+    // append the title to recipelist 
     recipeItem.appendChild(recipeTitle);
     recipeItem.appendChild(recipeImg);
+    recipeItem.appendChild(recipeIngredients)
+    recipeItem.appendChild(recipeInstructions)
     recipeList.appendChild(recipeItem);
   })
 } 
